@@ -1,11 +1,3 @@
-#### Part 1 — Prototype 4 (island game)
-
-I finished the Unit 4 gameplay stuff (roll around, camera, enemies, waves, powerup).
-
-The extra lab bit: normally the powerup turns on the second you touch it. I changed that. You pick it up → it’s stored → you press Fire (Space) → *then* it activates. That uses the new Input System and a C# event (`Attack.performed`), so the fire button “tells” the player script to turn the powerup on. Indicator shows you’ve got it; knockback only works after you fire.
-
----
-
 #### Part 2 
 
 Input  
