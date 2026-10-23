@@ -282,6 +282,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 09fbd153bdb6e8d4e9fe30fb73db906e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Wave3EnemyController
+  enemySprite: {fileID: 1369410586}
+  enemyBulletPrefab: {fileID: 3602039028471892477, guid: b4782a39f4633044ebcdf1c73812600c, type: 3}
   entranceZ: 4
   entranceSpeed: 3
   movementSpeed: 2
@@ -289,6 +291,10 @@ MonoBehaviour:
   horizontalRange: 7
   patternDuration: 6
   horizontalSpeed: 9
+  rollSpeed: 540
+  shootIntervalMin: 1.5
+  shootIntervalMax: 3
+  bulletSpreadAngle: 15
 --- !u!114 &474958268
 MonoBehaviour:
   m_ObjectHideFlags: 0
