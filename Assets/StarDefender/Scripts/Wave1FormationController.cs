@@ -53,10 +53,14 @@ public class Wave1FormationController : MonoBehaviour
             nextShoot = Time.time + Random.Range(shootIntervalMin, shootIntervalMax);
             int idx = Random.Range(0, transform.childCount);
             Transform shooter = transform.GetChild(idx);
-            var bullet = Instantiate(enemyBulletPrefab, shooter.position + Vector3.back * 0.6f, Quaternion.Euler(90f, 0f, 0f));
+            var bullet = Instantiate(enemyBulletPrefab, shooter.position + Vector3.back * 0.6f, Quaternion.Euler(90f, 0f, 180f));
             bullet.SetActive(true);
             var eb = bullet.GetComponent<EnemyBullet>();
-            if (eb != null) eb.SetDirection(Vector3.back);
+            if (eb != null)
+            {
+                eb.enabled = true;
+                eb.SetDirection(Vector3.back);
+            }
         }
     }
 }

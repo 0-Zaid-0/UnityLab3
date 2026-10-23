@@ -83,6 +83,9 @@ public static class StarDefenderFactory
         var root = new GameObject("Starfield");
         root.transform.position = new Vector3(0f, -1f, 0f);
 
+        var frame1 = new GameObject("Starfield1");
+        frame1.transform.SetParent(root.transform, false);
+
         // Soft dark plane (no ship texture)
         var plane = GameObject.CreatePrimitive(PrimitiveType.Quad);
         plane.name = "SpacePlane";
@@ -97,7 +100,7 @@ public static class StarDefenderFactory
         {
             var star = GameObject.CreatePrimitive(PrimitiveType.Sphere);
             star.name = "Star";
-            star.transform.SetParent(root.transform, false);
+            star.transform.SetParent(frame1.transform, false);
             float x = Random.Range(-12f, 12f);
             float z = Random.Range(-10f, 10f);
             float s = Random.Range(0.04f, 0.12f);
@@ -107,6 +110,22 @@ public static class StarDefenderFactory
             float bright = Random.Range(0.6f, 1f);
             TintRenderer(star, new Color(bright, bright, bright * 0.95f));
         }
+
+        var frame2 = Object.Instantiate(frame1, root.transform);
+        frame2.name = "Starfield2";
+
+        var frame3 = Object.Instantiate(frame1, root.transform);
+        frame3.name = "Starfield3";
+
+        frame1.transform.localPosition = new Vector3(0f, 0f, 0f);
+        frame2.transform.localPosition = new Vector3(0f, 0f, 20f);
+        frame3.transform.localPosition = new Vector3(0f, 0f, 40f);
+
+        var scrolling = root.AddComponent<ScrollingBackground>();
+        scrolling.frames = new Transform[]
+        {
+            frame1.transform, frame2.transform, frame3.transform
+        };
     }
 
     static void TintRenderer(GameObject go, Color color)
@@ -183,7 +202,7 @@ public static class StarDefenderFactory
 
                 var vis = TexturedQuad("Vis", tex[r % tex.Length], 1.4f, 1.4f, fb[r % fb.Length]);
                 vis.transform.SetParent(inv.transform, false);
-                vis.transform.localRotation = Quaternion.Euler(90f, 180f, 0f);
+                vis.transform.localRotation = Quaternion.Euler(90f, 180f, 180f);
 
                 var col = inv.AddComponent<BoxCollider>();
                 col.isTrigger = true;
@@ -223,7 +242,8 @@ public static class StarDefenderFactory
         else
         {
             go.tag = "EnemyBullet";
-            go.AddComponent<EnemyBullet>();
+            var eb = go.AddComponent<EnemyBullet>();
+            eb.enabled = false;
         }
         return go;
     }
